@@ -14,6 +14,7 @@ def create_ngram(text, n=2, mode='str'):
     return [''.join(l[i:i+n]) for i in range(len(l) - n + 1)]
 
 
-a = 'I am an NLPer'
-print(create_ngram(a))
-print(create_ngram(a, mode='word'))
+if __name__ == '__main__':
+    a = 'I am an NLPer'
+    print(create_ngram(a))
+    print(create_ngram(a, mode='word'))
