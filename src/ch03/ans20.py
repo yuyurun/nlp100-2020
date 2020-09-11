@@ -3,8 +3,7 @@
 
 import json
 
-
-if __name__ == '__main__':
+def extract_ing():
     with open('../../data/jawiki-country.json') as f:
         lines = f.readlines()
 
@@ -13,4 +12,9 @@ if __name__ == '__main__':
         row = json.loads(line)
         data[row['title']] = row
 
-    print(data['イギリス']['text'])
+    return data['イギリス']['text']
+    
+
+
+if __name__ == '__main__':
+    print(extract_ing())
