@@ -1,21 +1,25 @@
+def parse_mecab(sen):
+    l_sen = []
+    for line in sen.split('\n'):
+        if line == '':
+            return l_sen
 
-with open('../../data/neko.txt.mecab') as f:
-    lines = f.readlines()
-l_doc = []
-l_sen = []
-for line in lines:
-    if line != 'EOS\n' and line != '\n':
-        result = line.split('\t')
-        l_result = result[1].split(',')
+        (surface, attr) = line.split('\t')
+        attr = attr.split(',')
         l_dic = {
-            'serface': result[0],
-            'base': l_result[6],
-            'pos': l_result[0],
-            'pos1': l_result[1] 
+            'serface': surface,
+            'base': attr[6],
+            'pos': attr[0],
+            'pos1': attr[1] 
         }
         l_sen.append(l_dic)
-    elif line == 'EOS\n':
-        l_doc.append(l_sen)
-        l_sen = []
-    
-print(l_doc[:3])
+        
+
+fname = '../../data/neko.txt.mecab'
+with open(fname) as f:
+    lines = f.read().split('EOS\n')
+
+lines = list(filter(lambda x: x != '', lines))
+results = [parse_mecab(line) for line in lines]
+
+print(results[:3])
